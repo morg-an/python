@@ -23,3 +23,23 @@ def score_word(word):
 word = "BROWNIE"
 word_score = score_word(word)
 print("The word " + word + " scores " + str(word_score) + " points.")
+
+#score a full scrabble game
+#Create dictionary with all players and their word choices
+player_to_words = {"player1":["blue", "tennis", "exit"], "wordNerd":["earth", "eyes", "machine"], "Lexi Con":["Eraser", "Belly", "Husky"], "Prof Reader":["Zap", "Coma", "Period"]}
+
+#define empty dictionary to store scores for each player
+player_to_points = {}
+#iterate through players
+for player in player_to_words:
+  #start each player at 0 points
+  player_points = 0
+  #iterate through each player's word choices
+  for word in player_to_words.get(player):
+    #add each word score to each player's score
+    player_points += score_word(word)
+  #add player and score to player_to_points dict
+  player_to_points[player] = player_points
+
+#display all player's scores
+print(player_to_points)
