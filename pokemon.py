@@ -50,7 +50,7 @@ allPokemon = getPokemon()
 # Create a function to get all of the types of all Pokemon by:
 #  - looping through all Pokemon's urls
 #  - parsing the details
-#  - get types
+#  - getting types
 #  - cross checking if not already in list of abilities, then
 #  - adding to list.
 
@@ -70,7 +70,6 @@ allTypes = getTypes()
 print(allTypes)
 
 # Create a function to write JSON files for each type containing list of Pokemon with that type.
-# Save in separate files by type.
 
 
 def pokemonByType():
@@ -93,6 +92,7 @@ def pokemonByType():
             pokemon_by_type_dict.update({type: pokemon_by_type})
         # Create JSON
         json_string = json.dumps(pokemon_by_type_dict)
+        # saving JSON files to directory (specified above)
         with open('{}.json'.format(type), 'w') as newfile:
             newfile.write(json_string)
         print("{}.json".format(type) + " file created. Contents:" + json_string)
