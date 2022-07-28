@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New Task</title>
+</head>
+
+<body>
+    <h1>New Task</h1>
+    <form id='taskForm' method="post">
+        Task: <input type="text" name="todo" id="todo">
+        Start Date: <input type="date" name="start" id="start">
+        Due Date: <input type="date" name="due" id="due">
+        <button type="submit" id="submit" name="form">Submit</button>
+    </form><br><br>
+    <button id="get">See Updated List</button>
+    <p id="list"></p>
+    <a href="getapi.html">Go Back</a><br>
+    <script src="app.js"></script>
+</body>
+
+</html>
