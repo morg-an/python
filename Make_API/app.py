@@ -1,8 +1,10 @@
 import numpy as np
 import pandas as pd
 from flask import Flask
+from flask_cors import CORS, cross_origin
 import json
 app = Flask(__name__)
+cors = CORS(app)
 
 csv_list = pd.read_csv('todo.csv')
 
@@ -10,28 +12,29 @@ csv_list = pd.read_csv('todo.csv')
 # def home():
 #     return csv_list.to_json(orient="index")
 
+# Returns contents of CSV as JSON
 
-@ app.route('/')
+
+@ app.route('/get')
 def home():
     result = csv_list.to_json(orient="index")
+    # returns dict object
     parsed = json.loads(result)
     dumped = json.dumps(parsed, indent=4)
     return dumped
 
+# Returns contents of CSV as Python Dict.
+
 
 @app.route('/new')
 def new():
-    return "<h1>Add New To Do</h1>"
+    result = csv_list.to_json(orient="index")
+    parsed = json.loads(result)
+    return parsed
 
 
 # Notes to self:
 # Assign path to URL            @app.route("/")
 # Select virtual environment    View > Command Palette > Python: Select Interpreter
 # Run app                       "python3 -m flask run" in the terminal
-# Open in browser               ctrl + click the url in the terminal
-# Ensure only safe char in url  import re; match_object = re.match("[a-zA-Z]+", name)
 
-# Helpful Resources:
-# https://code.visualstudio.com/docs/python/tutorial-flask#:~:text=To%20run%20the%20app%20outside,using%20python%20%2Dm%20flask%20run%20.
-# https://towardsdatascience.com/the-right-way-to-build-an-api-with-python-cd08ab285f8f
-# https://flask-restful.readthedocs.io/en/latest/
