@@ -22,21 +22,25 @@ if (getList) {
             })
     })
 }
-// this runs on get page if display is cleared.
+// this runs to clear display when 'clear' button is pressed on either the /get or /new page.
 if (clear) {
     clear.addEventListener('click', function () {
         document.getElementById("list").innerHTML = ""
     })
 }
 
+//this runs when the user submits the form to add a new task
 if (addToList) {
     addToList.addEventListener('click', function (event) {
+        // prevent default prevents the page from refreshing on submit.
         event.preventDefault()
         fetch("http://127.0.0.1:5000/new")
+            // return existing to do list
             .then((res) => {
                 console.log("Resolved", res);
                 return res.json()
             })
+            // get user inputs from HTML form and append new task information
             .then((data) => {
                 let numToDos = Object.keys(data).length
                 const formData = new FormData(form)
@@ -48,8 +52,14 @@ if (addToList) {
                 console.log("Data: " + updatedList)
                 return updatedList
             })
+            // send updated JSON to Python so that Python can use it to update the CSV
             .then((updatedList) => {
-                document.getElementById('list').innerHTML = updatedList
+                $.ajax({
+                    url: "http://127.0.0.1:5000/update",
+                    type: "POST",
+                    contentType: "application/json",
+                    data: updatedList,
+                })
             })
             .catch((e) => {
                 console.log("oops - something went wrong", e)
