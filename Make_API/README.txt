@@ -1,3 +1,5 @@
-This project aims to create my first API in the form of a to do list. It currently retrieves csv data and returns as JSON.
-Users can also add a new task through an HTML form. At the present, that new task is incorporated into the JSON. 
-Still remaining - I need to update the CSV file with the new JSON to incorporate the new tasks as they are added.
+This project is a to do list API. It currently retrieves a csv to do list and returns it as JSON.
+Users can also add a new task through an HTML form. 
+The new task is added to the JSON that is returned and the CSV file is updated accordingly.
+
+To create this app - I used HTML, JavaScript, and Python (w/ Flask and Pandas modules)
