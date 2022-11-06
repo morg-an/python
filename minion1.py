@@ -1,65 +1,44 @@
 import math
 
-def solve(num):
+def solution(area):
     #Initialize variables
     low = 0
     guess = 500
     high = 1000
-    count = 0
     answer = []
-    remainder = num
+    remainder = area
 
     #Loop for as long as there is more than 0 left to use.
-    while(count < 1000 and remainder > 0):
-
-        #Print for testing purposes only.
-        print("Loop: ", count+1)
-        # print("Remainder: ", remainder)
-        print("Guess: ", guess)
-        # print("Area: ", guess*guess)
-        print("Answer: ", answer)
-        print("")
+    while(remainder >= 1):
 
         #Square my guess and compare to remaining area. If there is not enough surface, set guess as the new 'high' value and calculate new guess (using math.floor to round guess down)
         if(guess*guess > remainder):
             high = guess
-            next_guess = math.floor((low+high)/2)
-            count += 1
-            if guess == next_guess:
-                answer.append(guess*guess)
-                print(answer)
-                remainder = remainder-(guess*guess)
-                high = remainder
-                low = 0
-                guess = next_guess
-                count = 0
-            elif guess != next_guess:
-                guess = next_guess
-            else:
-                print("Whoops")
+            guess = math.floor((low+high)/2)
 
-        #Raise guess if it's too low.
+        #if square of guess is less than remainder and a new guess would not be higher, add the square area to solution list
         elif(guess*guess < remainder):
             low = guess
             next_guess = math.floor((low+high)/2)
-            count +=1
             if guess == next_guess:
                 answer.append(guess*guess)
                 remainder = remainder-(guess*guess)
                 high = remainder
                 low = 0
                 guess = next_guess
-                count = 0
+            #Raise guess if it's too low
             elif guess != next_guess:
                 guess = next_guess
-            else:
-                print("Whoopsie")
    
         #Ends the loop and returns answer when the last value is found.
         else:
             answer.append(guess*guess)
-            remainder = remainder-(guess*guess)
             return answer
-    answer
 
-print(solve(129803))
+    #Tacks on the remainder if starting number contained a decimal.
+    if remainder > 0:
+        answer.append(remainder)
+    
+    return answer
+
+print(solution(15324.5))
